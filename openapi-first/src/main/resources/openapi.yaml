@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  title: Orders API
+  version: 1.0.0
+paths:
+  /orders:
+    post:
+      tags: [orders]
+      operationId: createOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewOrder'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /orders/{id}:
+    get:
+      tags: [orders]
+      operationId: getOrder
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: The order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '404':
+          description: Not found
+components:
+  schemas:
+    NewOrder:
+      type: object
+      required: [customer, quantity]
+      properties:
+        customer:
+          type: string
+          minLength: 1
+        quantity:
+          type: integer
+          minimum: 1
+    Order:
+      type: object
+      required: [id, customer, quantity]
+      properties:
+        id:
+          type: integer
+          format: int64
+        customer:
+          type: string
+        quantity:
+          type: integer

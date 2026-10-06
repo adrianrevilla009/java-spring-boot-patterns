@@ -1,0 +1,8 @@
+id,customer,total
+1,ada,10.00
+2,bob,7.25
+3,ada,not-a-number
+4,BAD,1.00
+5,cy,3.50
+6,ada,25.50
+7,bob,2.00
